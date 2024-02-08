@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>Lista cursos</title>
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .message {
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+            color: #155724;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+        .table {
+            background-color: #fff;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f8f9fa;
+            color: #212529;
+        }
+        td {
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+<div class="container" th:replace="~{fragments/header::header}"></div>
+<br>
+<div class="container mb-5">
+    <div class="container mb-5">
+        <div th:if="${message != null}" class="alert alert-success alert-dismissible fade show text-center message">
+            [[${message}]]
+            <button type="button" class="close btn-sm" data-dismiss="alert" aria-label="Cerrar">
+                <span aria-hidden="true">X</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <table class="table table-hover table-responsive-xl">
+        <thead class="thead-light">
+        <tr>
+            <th>ID</th>
+            <th>Titulo</th>
+            <th>Descripcion</th>
+            <th>Nivel</th>
+            <th>Estado de publicacion</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="curso: ${cursos}">
+            <td th:text="${curso.id}"></td>
+            <td th:text="${curso.titulo}"></td>
+            <td th:text="${curso.descripcion}"></td>
+            <td th:text="${curso.nivel}"></td>
+            <td th:text="${curso.isPublicado}"></td>
+            <td>
+                <a th:href="@{'/cursos/editar/' + ${curso.id}}" class="btn btn-primary btn-sm">Editar</a>
+                <a th:href="@{'/cursos/eliminar/' + ${curso.id}}" class="btn btn-danger btn-sm">Eliminar</a>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+
+</body>
+</html>
